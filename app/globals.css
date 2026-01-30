@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  /* Define your Pixel Palettes */
+  --color-game-bg: #e0f8d0;   /* Original GameBoy Green-White */
+  --color-game-accent: #346856; /* Dark Moss Green */
+  --color-game-black: #081820;  /* Deepest Pixel Green */
+
+  /* Define your Retro Typography */
+  
+  /* The "Terminal" style for Python code (Supports lowercase) */
+  --font-pixel-code: "VT323", monospace;
+
+  /* Global Retro Shadow Utility */
+  --shadow-retro: 4px 4px 0px 0px #000;
+}
+
+@layer utilities {
+  .text-neon-pink {
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+  .text-neon-cyan {
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+  .border-neon-pink {
+    box-shadow: 0 0 5px #ff00ff, inset 0 0 5px #ff00ff;
+    border-color: #ff00ff;
+  }
+  .border-neon-cyan {
+    box-shadow: 0 0 5px #00ffff, inset 0 0 5px #00ffff;
+    border-color: #00ffff;
+  }
+}
