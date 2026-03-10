@@ -1,81 +1,89 @@
 "use client";
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Press_Start_2P } from 'next/font/google';
 
-const pixelyfont = Press_Start_2P({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
+import Link from "next/link";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Press_Start_2P, VT323 } from "next/font/google";
+
+const pixelHeader = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
 });
+
+const pixelBody = VT323({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const quickLinks = [
+  { href: "/", label: "Home" },
+  { href: "/topics", label: "Topics" },
+  { href: "/", label: "Upcoming Leaderboard" },
+  { href: "/", label: "Upcoming Streaks" },
+];
 
 const Footer = () => {
   const container = useRef(null);
 
   useGSAP(() => {
-    // Flickering effect for the Press Start text
     gsap.to(".press-start", {
       opacity: 0.3,
       duration: 0.8,
       repeat: -1,
       yoyo: true,
-      ease: "steps(1)", // Makes it "blink" rather than fade smoothly
+      ease: "steps(1)",
     });
   }, { scope: container });
 
   return (
-    <footer ref={container} className={`${pixelyfont.className} bg-black text-white p-10 border-t-8 border-green-500`}>
-      <div className="max-w-7xl mx-auto">
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-10">
-          
-          {/* Section 1: Brand */}
-          <div className="flex flex-col gap-4">
-            <h2 className="text-green-500 text-xl">DSA QUIZ</h2>
-            <p className="text-green-800 text-xs leading-relaxed">
-              Making DSA learning fun and nostalgic since 2026.
+    <footer
+      ref={container}
+      className={`${pixelBody.className} border-t-8 border-green-500 bg-black px-4 py-10 text-white sm:px-6 lg:px-10`}
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          <div className="border-4 border-green-500 bg-[#081820] p-5 shadow-[8px_8px_0_0_#4ade80]">
+            <h2 className={`${pixelHeader.className} text-sm text-green-400 sm:text-base`}>DSA QUIZ</h2>
+            <p className="mt-4 text-xl leading-relaxed text-green-100 sm:text-2xl">
+              Retro-styled DSA practice that turns revision into short, structured missions.
             </p>
           </div>
 
-          {/* Section 2: Quick Links */}
-          <div className="flex flex-col gap-4">
-            <h2 className="text-cyan-400 text-xl">QUICK LINKS</h2>
-            <ul className="text-green-500 text-xs flex flex-col gap-3">
-              <li className="hover:text-cyan-400 cursor-pointer">→ Home</li>
-              <li className="hover:text-cyan-400 cursor-pointer">→ Topics</li>
-              <li className="hover:text-cyan-400 cursor-pointer">→ Leaderboard</li>
-              <li className="hover:text-cyan-400 cursor-pointer">→ Profile</li>
-            </ul>
+          <div className="border-4 border-cyan-400 bg-[#06131a] p-5 shadow-[8px_8px_0_0_#22d3ee]">
+            <h2 className={`${pixelHeader.className} text-sm text-cyan-300 sm:text-base`}>QUICK LINKS</h2>
+            <div className="mt-4 flex flex-col gap-3">
+              {quickLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-xl text-cyan-100 transition-colors hover:text-cyan-300 sm:text-2xl"
+                >
+                  {`> ${link.label}`}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Section 3: Connect */}
-          <div className="flex flex-col gap-4">
-            <h2 className="text-pink-500 text-xl">CONNECT</h2>
-            <ul className="text-green-500 text-xs flex flex-col gap-3">
-              <li className="flex items-center gap-2 hover:text-pink-400 cursor-pointer">
-                <span className="text-green-400">◆</span> GitHub
-              </li>
-              {/* <li className="flex items-center gap-2 hover:text-pink-400 cursor-pointer">
-                <span className="text-green-400">◆</span> Twitter
-              </li>
-              <li className="flex items-center gap-2 hover:text-pink-400 cursor-pointer">
-                <span className="text-green-400">◆</span> Discord
-              </li> */}
-            </ul>
+          <div className="border-4 border-pink-400 bg-[#170913] p-5 shadow-[8px_8px_0_0_#f472b6]">
+            <h2 className={`${pixelHeader.className} text-sm text-pink-300 sm:text-base`}>CONNECT</h2>
+            <div className="mt-4 space-y-3 text-xl text-pink-100 sm:text-2xl">
+              <p>GitHub-ready project structure</p>
+              <p>Progress-driven product roadmap</p>
+              <p>More social systems coming soon</p>
+            </div>
           </div>
         </div>
 
-        {/* Separator Line */}
-        <hr className="border-green-900 mb-10" />
+        <hr className="my-8 border-green-900" />
 
-        {/* Bottom Section */}
-        <div className="flex flex-col items-center gap-6">
-          <p className="text-green-600 text-[10px]">
-            © 2026 PixelDSA. Made with <span className="text-red-600">❤</span> and lots of coffee.
+        <div className="flex flex-col items-center gap-5 text-center">
+          <p className="text-base text-green-500 sm:text-lg">
+            {"(c) 2026 PixelDSA. Built with logic, coffee, and late-night debugging."}
           </p>
-          
-          <h3 className="press-start text-green-400 text-lg tracking-widest">
+          <h3 className={`${pixelHeader.className} press-start text-sm tracking-widest text-green-400 sm:text-lg`}>
             PRESS LOGIN TO CONTINUE...
           </h3>
         </div>

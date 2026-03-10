@@ -1,137 +1,137 @@
-"use client"
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { Press_Start_2P } from 'next/font/google'
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { Press_Start_2P, VT323 } from "next/font/google";
 
 if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
-const pixelyfont = Press_Start_2P({
-    weight: '400',
-    subsets: ['latin'],
-    display: 'swap',
-})
+const pixelHeader = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
+const pixelBody = VT323({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
+const topicGroups = [
+  {
+    label: "Beginner",
+    border: "border-lime-400",
+    background: "bg-green-950",
+    text: "text-green-300",
+    chip: "bg-lime-400 text-black",
+    topics: ["Arrays", "Linked Lists", "Stacks", "Queues"],
+  },
+  {
+    label: "Intermediate",
+    border: "border-cyan-400",
+    background: "bg-cyan-950",
+    text: "text-cyan-300",
+    chip: "bg-cyan-400 text-black",
+    topics: ["Trees", "Binary Search", "Sorting", "Hashing"],
+  },
+  {
+    label: "Advanced",
+    border: "border-fuchsia-400",
+    background: "bg-fuchsia-950",
+    text: "text-fuchsia-300",
+    chip: "bg-fuchsia-400 text-black",
+    topics: ["Graphs", "Dynamic Programming", "Backtracking", "Greedy"],
+  },
+];
 
 const TopicPage = () => {
-    const container = useRef(null);
-useGSAP(() => {
-    gsap.from(".topic-box", {
-        y: 80,
+  const container = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".topic-box", {
+        y: 48,
         opacity: 0,
-        scale: 0.9,
-        duration: 0.5,
+        scale: 0.94,
+        duration: 0.55,
         ease: "back.out(1.2)",
-        stagger: {
-            each: 0.1,
-            from: "start" // Animates row by row
-        },
+        stagger: 0.08,
         scrollTrigger: {
-            trigger: container.current,
-            // "top 85%" means: Start when the TOP of the container hits 85% of the viewport height
-            start: "top 85%", 
-            // "bottom 20%" means: End when the BOTTOM of the container hits 20% of the viewport height
-            end: "bottom 20%",
-            toggleActions: "play reverse restart reverse",
-            // markers: true, // UNCOMMENT THIS to see the trigger lines on your screen!
-        }
-    });
-}, { scope: container });
-    return (
-        <div className={`${pixelyfont.className} bg-black pb-40`}><div className='flex flex-col items-center justify-center'>
+          trigger: container.current,
+          start: "top 75%",
+        },
+      });
+    },
+    { scope: container }
+  );
 
-            <div className="relative flex items-center justify-center">
-                {/* The Halo/Glow Layer */}
-                <span className="absolute blur-md h-20 w-40 opacity-80 text-pink-500  select-none">
-                    ★ TOPICS ★
+  return (
+    <section
+      ref={container}
+      className={`${pixelBody.className} bg-black px-4 py-16 text-white sm:px-6 lg:px-10`}
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 text-center">
+          <div className="relative inline-flex items-center justify-center">
+            <span className={`${pixelHeader.className} absolute inset-0 blur-md text-pink-500 opacity-80`}>
+              TOPICS
+            </span>
+            <h2 className={`${pixelHeader.className} relative text-lg text-pink-400 sm:text-2xl`}>
+              TOPICS
+            </h2>
+          </div>
+          <p className="mt-4 text-xl text-green-300 sm:text-2xl">
+            Explore the worlds waiting inside the platform
+          </p>
+        </div>
+
+        <div className="space-y-10">
+          {topicGroups.map((group) => (
+            <section key={group.label}>
+              <div className="mb-5 flex items-center justify-between gap-4 border-b-2 border-zinc-800 pb-3">
+                <h3 className={`${pixelHeader.className} text-xs ${group.text} sm:text-sm`}>
+                  {group.label.toUpperCase()}
+                </h3>
+                <span className={`${pixelHeader.className} px-3 py-1 text-[10px] ${group.chip}`}>
+                  {group.topics.length} ZONES
                 </span>
-                {/* The Sharp Neon Text */}
-                <h1 className="relative py-4 text-pink-400 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)] text-xl font-extrabold">
-                    ★ TOPICS ★
-                </h1>
-            </div>
-            <p className='text-xs text-green-300'>Your journey to DSA mastery in 4 simple steps</p>
-        </div>
-            <div className='flex mb-0'>
-                <div className='topic-box border-8 my-0 m-10 bg-green-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-lime-400'>
-                    <p className='text-green-400 hover:animate-pulse text-sm duration-50'>ARRAYS</p>
-                    <p className='text-green-600 text-[10px]'>BEGINNER</p>
-                </div>
-                <div className='topic-box border-8 my-0 m-10 bg-green-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-lime-400'>
-                    <p className='text-green-400 hover:animate-pulse duration-50'>LINKED LISTS</p>
-                    <p className='text-green-600 text-[10px]'>BEGINNER</p>
-                </div>
-                <div className='topic-box border-8 my-0 m-10 bg-green-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-lime-400'>
-                    <p className='text-green-400 hover:animate-pulse duration-50'>STACKS</p>
-                    <p className='text-green-600 text-[10px]'>BEGINNER</p>
-                </div>
-                <div className=' topic-box border-8 my-0 m-10 bg-green-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-lime-400'>
-                    <p className='text-green-400 hover:animate-pulse duration-50'>QUEUES</p>
-                    <p className='text-green-600 text-[10px]'>BEGINNER</p>
-                </div>
-            </div>
-            <div className='flex'>
-                <div className='topic-box border-8 my-5  m-10 bg-cyan-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-cyan-400'>
-                    <p className='text-cyan-400 text-sm hover:animate-pulse duration-50'>TREES</p>
-                    <p className='text-green-600 text-[10px]'>INTERMEDIATE</p>
-                </div>
-                <div className='topic-box border-8 my-5 m-10 bg-cyan-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-cyan-400'>
-                    <p className='text-cyan-400 hover:animate-pulse duration-50'>BINARY SEARCH</p>
-                    <p className='text-green-600 text-[10px]'>INTERMEDIATE</p>
-                </div>
-                <div className='topic-box border-8 my-5 m-10 bg-cyan-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-cyan-400'>
-                    <p className='text-cyan-400 hover:animate-pulse duration-50' >SORTING</p>
-                    <p className='text-green-600 text-[10px]'>INTERMEDIATE</p>
-                </div>
-                <div className='topic-box border-8 my-5 m-10 bg-cyan-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-cyan-400'>
-                    <p className='text-cyan-400 hover:animate-pulse duration-50'>HASHING
-                    </p>
-                    <p className='text-green-600 text-[10px]'>INTERMEDIATE</p>
-                </div>
-            </div>
-            <div className='flex'>
-                <div className='topic-box border-8 mt-0 m-10 bg-fuchsia-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-fuchsia-400'>
-                    <p className='text-fuchsia-400 text-sm hover:animate-pulse duration-50'>GRAPHS</p>
-                    <p className='text-green-600 text-[10px]'>ADVANCED
-                    </p>
-                </div>
-                <div className='topic-box border-8 mt-0 m-10 bg-fuchsia-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-fuchsia-400'>
-                    <p className='text-fuchsia-400 hover:animate-pulse duration-50'>DYNAMIC PROGRAMMING</p>
-                    <p className='text-green-600 text-[10px]'>ADVANCED
-                    </p>
-                </div>
-                <div className='topic-box border-8 mt-0 m-10 bg-fuchsia-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-fuchsia-400'>
-                    <p className='text-fuchsia-400 hover:animate-pulse duration-50'>BACKTRACKING</p>
-                    <p className='text-green-600 text-[10px]'>ADVANCED
-                    </p>
-                </div>
-                <div className='topic-box border-8 mt-0 m-10 bg-fuchsia-950 gap-3 w-[20vw] h-[15vh] flex flex-col items-center justify-center border-fuchsia-400'>
-                    <p className='text-fuchsia-400 hover:animate-pulse duration-50'>GREEDY</p>
-                    <p className='text-green-600 text-[10px]'>ADVANCED
-                    </p>
-                </div>
-            </div>
-            <div className='flex items-center gap-10 justify-center'>
-                <div className='flex gap-3'>
-                    <div className='h-5 w-5 bg-lime-400' />
-                    <p className='text-lime-400'>BEGINNER</p>
-                </div>
-                <div className='flex gap-3'>
-                    <div className='h-5 w-5 bg-cyan-400' />
-                    <p className='text-cyan-400'>INTERMEDIATE</p>
-                </div>
-                <div className='flex gap-3'>
-                    <div className='h-5 w-5 bg-fuchsia-400' />
-                    <p className='text-fuchsia-400'>ADVANCED
-                    </p>
-                </div>
-            </div>
-        </div>
-    )
-}
+              </div>
 
-export default TopicPage
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {group.topics.map((topic) => (
+                  <article
+                    key={topic}
+                    className={`topic-box ${group.background} ${group.border} flex min-h-[150px] flex-col items-center justify-center gap-3 border-4 px-4 py-6 text-center shadow-[8px_8px_0_0_#111827]`}
+                  >
+                    <p className={`${group.text} text-xl leading-tight sm:text-2xl`}>{topic}</p>
+                    <p className="text-[11px] tracking-[0.2em] text-zinc-400">
+                      {group.label.toUpperCase()}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+          {topicGroups.map((group) => (
+            <div key={group.label} className="flex items-center gap-3">
+              <div className={`h-4 w-4 ${group.chip.split(" ")[0]}`} />
+              <p className={`${pixelHeader.className} text-[10px] ${group.text}`}>
+                {group.label.toUpperCase()}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TopicPage;

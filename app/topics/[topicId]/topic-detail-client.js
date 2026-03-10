@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
 import { Press_Start_2P, VT323 } from "next/font/google";
 import { DIFFICULTIES } from "@/lib/dsaDifficulties";
 import { useRouter } from "next/navigation";
@@ -9,33 +8,12 @@ import { useRouter } from "next/navigation";
 const pixelHeader = Press_Start_2P({ weight: '400', subsets: ['latin'] });
 const pixelBody = VT323({ weight: '400', subsets: ['latin'] });
 
-export default function TopicDetailClient({ topic, topicId }) {
-  const { data: session, status } = useSession();
-  const [progress, setProgress] = useState(null);
+export default function TopicDetailClient({ topic, topicId, isAuthenticated, initialProgress }) {
   const router = useRouter();
-  useEffect(() => {
-    if (status === "authenticated") {
-      fetch(`/api/progress/topic-summary/${topicId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) setProgress(data.progress);
-        });
-    }
-  }, [topicId, status]);
-
-  // 1. Loading State (Matching your system boot style)
-  if (status === "loading" || (status === "authenticated" && !progress)) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center text-green-500">
-        <div className={`${pixelHeader.className} text-[10px] animate-pulse`}>
-          INITIALIZING DATA STREAM...
-        </div>
-      </div>
-    );
-  }
+  const progress = initialProgress;
 
   // 2. Unauthenticated State (The "Login to Continue" Banner)
-  if (status === "unauthenticated") {
+  if (!isAuthenticated) {
     return (
       <div className={`${pixelBody.className} relative min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6`}>
          {/* Background Grid (Consistent with Topics Page) */}

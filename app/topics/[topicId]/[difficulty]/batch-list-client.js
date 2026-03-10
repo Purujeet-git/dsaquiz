@@ -1,46 +1,20 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import { Press_Start_2P, VT323 } from "next/font/google";
-import gsap from "gsap";
 
 const pixelHeader = Press_Start_2P({ weight: '400', subsets: ['latin'] });
 const pixelBody = VT323({ weight: '400', subsets: ['latin'] });
 
-export default function BatchListClient({ topicId, difficulty, topicTitle, batches }) {
-  const [completedBatches, setCompletedBatches] = useState(new Set());
-  const [loading, setLoading] = useState(true);
-  const gridRef = useRef(null);
-
-  useEffect(() => {
-    fetch(`/api/progress/batches/${topicId}/${difficulty}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.completedBatches) setCompletedBatches(new Set(data.completedBatches));
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [topicId, difficulty]);
-
-  useEffect(() => {
-    if (!loading) {
-      gsap.to(gridRef.current, {
-        backgroundPositionY: '40px',
-        duration: 2,
-        repeat: -1,
-        ease: "none"
-      });
-    }
-  }, [loading]);
-
-  if (loading) return <div className="min-h-screen bg-[#0a0a0a]" />;
+export default function BatchListClient({ topicId, difficulty, topicTitle, batches, completedBatches }) {
+  const completedBatchSet = new Set(completedBatches);
 
   return (
     <div className={`${pixelBody.className} relative min-h-screen bg-[#0a0a0a] text-white flex flex-col overflow-x-hidden`}>
       
       {/* Background Grid */}
       <div className="absolute inset-0 z-0 [perspective:800px]">
-        <div ref={gridRef} className="absolute inset-0 origin-top [transform:rotateX(60deg)] opacity-10"
+        <div className="absolute inset-0 origin-top [transform:rotateX(60deg)] opacity-10 animate-[grid-scroll_2s_linear_infinite]"
              style={{ backgroundImage: `linear-gradient(to right, #4ade80 1px, transparent 1px), linear-gradient(to bottom, #4ade80 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
       </div>
 
@@ -69,8 +43,8 @@ export default function BatchListClient({ topicId, difficulty, topicTitle, batch
           <div className="absolute left-[2.4rem] top-0 bottom-0 w-1 bg-green-900 border-l-2 border-green-500/30 -z-10" />
 
           {batches.map((batch, index) => {
-            const isCompleted = completedBatches.has(batch.batchNumber);
-            const isLocked = index > 0 && !completedBatches.has(batches[index - 1].batchNumber);
+            const isCompleted = completedBatchSet.has(batch.batchNumber);
+            const isLocked = index > 0 && !completedBatchSet.has(batches[index - 1].batchNumber);
             const isCurrent = !isCompleted && !isLocked;
 
             return (
@@ -118,17 +92,17 @@ export default function BatchListClient({ topicId, difficulty, topicTitle, batch
             <div>
               <h3 className={`${pixelHeader.className} text-[14px] uppercase`}>Total Sync</h3>
               <p className="text-[10px] font-bold opacity-60 uppercase mt-2">
-                {completedBatches.size} / {batches.length} Sectors Secured
+                {completedBatchSet.size} / {batches.length} Sectors Secured
               </p>
             </div>
             <div className={`${pixelHeader.className} text-3xl text-green-600`}>
-              {Math.round((completedBatches.size / batches.length) * 100)}%
+              {Math.round((completedBatchSet.size / batches.length) * 100)}%
             </div>
           </div>
           
           <div className="w-full bg-black border-4 border-black h-10 p-1">
             <div className="h-full bg-green-500 shadow-[0_0_15px_rgba(74,222,128,0.5)] transition-all duration-1000"
-                 style={{ width: `${(completedBatches.size / batches.length) * 100}%` }} />
+                 style={{ width: `${(completedBatchSet.size / batches.length) * 100}%` }} />
           </div>
         </div>
       </div>

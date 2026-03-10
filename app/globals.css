@@ -31,3 +31,13 @@
     border-color: #00ffff;
   }
 }
+
+@keyframes grid-scroll {
+  from {
+    background-position-y: 0;
+  }
+
+  to {
+    background-position-y: 40px;
+  }
+}
