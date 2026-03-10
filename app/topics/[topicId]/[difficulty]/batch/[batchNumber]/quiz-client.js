@@ -156,7 +156,7 @@ export default function QuizClient({ topicId, difficulty, batchNumber, questions
 
       <div className="max-w-6xl mx-auto relative z-10 pb-28 sm:pb-32">
         <div className="mb-6 sm:mb-8 md:mb-10">
-          <div className="flex justify-between gap-4 text-[9px] sm:text-[10px] uppercase font-bold mb-2 text-[#00ffff]">
+          <div className="flex justify-between gap-4 text-[25px] sm:text-[10px] uppercase font-bold mb-2 text-[#00ffff]">
             <span>System Syncing</span>
             <span>{Math.round(progress)}%</span>
           </div>
@@ -190,7 +190,7 @@ export default function QuizClient({ topicId, difficulty, batchNumber, questions
 
           <div className="bg-black/80 border-4 border-[#00ffff] p-4 sm:p-6 md:p-8 shadow-[0_0_15px_rgba(0,255,255,0.2)]">
             <div className="flex flex-wrap justify-between items-center gap-3 mb-5 sm:mb-6">
-              <span className="bg-[#00ffff] text-black px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase">
+              <span className="bg-[#00ffff] text-black px-3 py-1 text-[25px] sm:text-[10px] font-bold uppercase">
                 Level {currentIndex + 1}
               </span>
               <span className="text-pink-500 font-bold tracking-tighter text-sm sm:text-base md:text-lg">
