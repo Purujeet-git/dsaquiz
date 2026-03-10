@@ -17,7 +17,7 @@ const User = mongoose.models.User || mongoose.model("User", UserSchema);
 async function fixAdminBoolean(email) {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("✅ Connected to MongoDB");
+    // console.log("✅ Connected to MongoDB");
 
     const user = await User.findOneAndUpdate(
       { email },
@@ -26,16 +26,16 @@ async function fixAdminBoolean(email) {
     );
 
     if (!user) {
-      console.log("❌ User not found");
+      // console.log("❌ User not found");
     } else {
-      console.log("✅ Fixed admin field:");
-      console.log(`  Email: ${user.email}`);
-      console.log(`  isAdmin: ${user.isAdmin} (type: ${typeof user.isAdmin})`);
+      // console.log("✅ Fixed admin field:");
+      // console.log(`  Email: ${user.email}`);
+      // console.log(`  isAdmin: ${user.isAdmin} (type: ${typeof user.isAdmin})`);
     }
 
     await mongoose.connection.close();
   } catch (error) {
-    console.error("❌ Error:", error);
+    // console.error("❌ Error:", error);
     process.exit(1);
   }
 }

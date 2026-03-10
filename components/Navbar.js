@@ -30,9 +30,9 @@ const Navbar = () => {
 
                 {/* Navigation Links */}
                 <div className="flex items-center gap-8 text-[10px] text-green-700 uppercase">
-                    <Link className='hover:text-green-400 transition-colors' href='/'>Features</Link>
-                    <Link className='hover:text-green-400 transition-colors' href='/topics'>Topics</Link>
-                    <Link className='hover:text-green-400 transition-colors' href='/'>How it Works</Link>
+                    {/* <Link className='hover:text-green-400 transition-colors' href='#features'>Features</Link> */}
+                    <Link className='hover:text-green-400 transition-colors' href='/topics'>Start Here</Link>
+                    {/* <Link className='hover:text-green-400 transition-colors' href='/'>How it Works</Link> */}
                     
                     {/* Session-based UI */}
                     {status === "authenticated" ? (

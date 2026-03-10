@@ -134,7 +134,7 @@ export async function POST(req) {
     progress.markModified("topics");
     await progress.save();
 
-    console.log(`✅ Batch ${batchNumber} completed - Score: ${score}/${total} | Streak: ${progress.streak}`);
+    // console.log(`✅ Batch ${batchNumber} completed - Score: ${score}/${total} | Streak: ${progress.streak}`);
 
     return NextResponse.json({
       success: true,
@@ -148,7 +148,7 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.error("Complete batch error:", error);
+    // console.error("Complete batch error:", error);
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }

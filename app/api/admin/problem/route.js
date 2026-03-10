@@ -155,7 +155,7 @@ export async function POST(req) {
       }
     });
   } catch (error) {
-    console.error("Problem upload error:", error);
+    // console.error("Problem upload error:", error);
     
     // Return more specific error messages
     if (error.message.includes('Question') || error.message.includes('options')) {

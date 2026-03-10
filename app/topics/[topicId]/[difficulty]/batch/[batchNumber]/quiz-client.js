@@ -168,7 +168,26 @@ export default function QuizClient({ topicId, difficulty, batchNumber, questions
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-8 items-start">
+        <div className="grid gap-5 items-start">
+          {currentQuestion.code && (
+            <div className="border-4 border-zinc-700 bg-black shadow-[0_0_20px_rgba(0,0,0,1)] relative group">
+              <div className="bg-zinc-900 px-3 sm:px-4 py-2 border-b-4 border-zinc-700 flex justify-between items-center gap-3">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 bg-[#ff5f56] rounded-full" />
+                  <div className="w-2.5 h-2.5 bg-[#ffbd2e] rounded-full" />
+                  <div className="w-2.5 h-2.5 bg-[#27c93f] rounded-full" />
+                </div>
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-zinc-500">source_code.py</span>
+              </div>
+              <div className="p-4 sm:p-6 relative overflow-x-auto">
+                <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%)] bg-[length:100%_4px]" />
+                <pre className="text-sm sm:text-base md:text-lg text-green-400 font-mono whitespace-pre leading-relaxed min-w-max">
+                  <code>{currentQuestion.code}</code>
+                </pre>
+              </div>
+            </div>
+          )}
+
           <div className="bg-black/80 border-4 border-[#00ffff] p-4 sm:p-6 md:p-8 shadow-[0_0_15px_rgba(0,255,255,0.2)]">
             <div className="flex flex-wrap justify-between items-center gap-3 mb-5 sm:mb-6">
               <span className="bg-[#00ffff] text-black px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase">
@@ -231,25 +250,6 @@ export default function QuizClient({ topicId, difficulty, batchNumber, questions
               </button>
             )}
           </div>
-
-          {currentQuestion.code && (
-            <div className="border-4 border-zinc-700 bg-black shadow-[0_0_20px_rgba(0,0,0,1)] relative group">
-              <div className="bg-zinc-900 px-3 sm:px-4 py-2 border-b-4 border-zinc-700 flex justify-between items-center gap-3">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-[#ff5f56] rounded-full" />
-                  <div className="w-2.5 h-2.5 bg-[#ffbd2e] rounded-full" />
-                  <div className="w-2.5 h-2.5 bg-[#27c93f] rounded-full" />
-                </div>
-                <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-zinc-500">source_code.py</span>
-              </div>
-              <div className="p-4 sm:p-6 relative overflow-x-auto">
-                <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%)] bg-[length:100%_4px]" />
-                <pre className="text-sm sm:text-base md:text-lg text-green-400 font-mono whitespace-pre leading-relaxed min-w-max">
-                  <code>{currentQuestion.code}</code>
-                </pre>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 

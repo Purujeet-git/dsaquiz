@@ -48,8 +48,8 @@ export const authOptions = {
             user.totalXP = dbUser.totalXP || 0;
             user.streakCount = dbUser.streakCount || 0;
             
-            console.log("✅ signIn callback - user.mongoId:", user.mongoId);
-            console.log("✅ signIn callback - user.isAdmin:", user.isAdmin);
+            // console.log("✅ signIn callback - user.mongoId:", user.mongoId);
+            // console.log("✅ signIn callback - user.isAdmin:", user.isAdmin);
             return true;
         },
 
@@ -61,8 +61,8 @@ export const authOptions = {
                 token.totalXP = user.totalXP;
                 token.streakCount = user.streakCount;
                 
-                console.log("✅ jwt callback - token.id:", token.id);
-                console.log("✅ jwt callback - token.isAdmin:", token.isAdmin);
+                // console.log("✅ jwt callback - token.id:", token.id);
+                // console.log("✅ jwt callback - token.isAdmin:", token.isAdmin);
             }
             
             // ✅ Handle session updates (when user completes batches, etc.)
@@ -90,8 +90,8 @@ export const authOptions = {
                 session.user.totalXP = token.totalXP;
                 session.user.streakCount = token.streakCount;
                 
-                console.log("✅ session callback - session.user.id:", session.user.id);
-                console.log("✅ session callback - session.user.isAdmin:", session.user.isAdmin);
+                // console.log("✅ session callback - session.user.id:", session.user.id);
+                // console.log("✅ session callback - session.user.isAdmin:", session.user.isAdmin);
             }
             return session;
         },
